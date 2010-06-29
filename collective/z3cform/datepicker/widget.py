@@ -94,6 +94,7 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
         shortYearCutoff         = 10,
         showAnim                = u'show',
         showButtonPanel         = False,
+        showInline              = False,
         showOn                  = u'both',
         showOptions             = {},
         showOtherMonths         = False,
@@ -136,7 +137,7 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
     def datepicker_javascript(self):
         return '''/* <![CDATA[ */
             jq(document).ready(function(){
-                datepicker = jq("#%(id)s").datepicker({%(options)s});
+                datepicker = jq("#%(datepicker_id)s").datepicker({%(options)s});
                 jq("%(altField)s").attr("readonly", "readonly");
                 jq("%(altField)s").addClass('embed');
                 jq("%(altField)s").each(function() {
@@ -155,6 +156,7 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
                 });
             });
             /* ]]> */''' % dict(id=self.id,
+                                datepicker_id=self.options['showInline'] and self.id + '-inline' or self.id,
                                 options=self.compile_options(),
                                 altField=self._options['altField'],
                                 altFormat=self.options['altFormat'],
@@ -252,7 +254,7 @@ class DateTimePickerWidget(DatePickerWidget):
                 jq("#%(id)s-hour").change(readLinked);
                 jq("#%(id)s-min").change(readLinked);
 
-                datepicker = jq("#%(id)s").datepicker({%(options)s});
+                datepicker = jq("#%(datepicker_id)s").datepicker({%(options)s});
                 // Prevent selection of invalid dates through the select controls 
                 jq("#%(id)s-month, #%(id)s-year").change(function () { 
                     var daysInMonth = 32 - new Date(jq("#%(id)s-year").val(), 
@@ -264,7 +266,9 @@ class DateTimePickerWidget(DatePickerWidget):
                     } 
                 });
             });
-            /* ]]> */''' % dict(id=self.id,options=self.compile_options())
+            /* ]]> */''' % dict(id=self.id,
+                                datepicker_id=self.options['showInline'] and self.id + '-inline' or self.id,
+                                options=self.compile_options())
                     
     def get_date_component(self, comp):
         """ Get string of of one part of datetime.
