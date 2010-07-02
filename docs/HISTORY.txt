@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1rc8 (unreleased)
+0.1rc8 (2010-07-02)
 -------------------
 
  * FIX: leading zero was preventing correct selection of the
