@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1rc9dev'
+version = '0.1rc9'
 
 setup(name='collective.z3cform.datepicker',
       version=version,

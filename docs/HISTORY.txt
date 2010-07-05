@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1rc9 (unreleased)
+0.1rc9 (2010-07-05)
 -------------------
 
 * Brown bag release. Didn't realize that Inline Calendars don't show
