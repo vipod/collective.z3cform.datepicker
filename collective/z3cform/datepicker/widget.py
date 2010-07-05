@@ -33,7 +33,7 @@ import z3c.form
 from z3c.form.browser import widget
 from z3c.form.widget import FieldWidget
 from z3c.form.widget import Widget
-from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFieldWidget, IDataConverter
 from z3c.form.interfaces import IFormLayer
 from z3c.form.converter import CalendarDataConverter
 from z3c.form.converter import FormatterValidationError
@@ -110,7 +110,11 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
     def _options(self):
         return dict(
         altField   = '#'+self.id+u'-for-display',
-        dateFormat = u'mm/dd/yy')
+        dateFormat = self.datepattern)
+
+    @property
+    def datepattern(self):
+        return IDataConverter(self).formatter.getPattern()
 
     def update(self):
         super(DatePickerWidget, self).update()
@@ -132,6 +136,8 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
         for name, value in self.events.items():
             if not value: continue
             options += name+': '+str(value)+','
+        if self.options['showInline']:
+            options += 'defaultDate:new Date(\''+IDataConverter(self).toFieldValue(self.value).strftime('%m/%d/%Y')+'\'),'
         return options[:-1]
 
     def datepicker_javascript(self):
@@ -182,7 +188,7 @@ class DateTimePickerWidget(DatePickerWidget):
                         yearRange=str(years[0])+':'+str(years[-1])))
     events = DatePickerWidget.events.copy()
     events.update(dict(onSelect='updateLinked'))
-    _options = dict(dateFormat='mm/dd/yy')
+    _options = {}
     
     @property
     def hours(self):
@@ -331,7 +337,6 @@ class DateTimePickerWidget(DatePickerWidget):
         
         Scan all selection lists and form datetime based on them.
         """
-        
         components = [ "year", "day", "month", "hour", "min" ]
         values = {}
         
@@ -381,7 +386,7 @@ class DateTimeConverter(CalendarDataConverter):
         if value == u'':
             return self.field.missing_value
         try:
-            return self.formatter.parse(value, pattern="M/d/yyyy H:m")
+            return self.formatter.parse(value)
         except DateTimeParseError, err:
             raise FormatterValidationError(err.args[0], value)
 

@@ -1,4 +1,18 @@
-==========================================
+=======
+WARNING
+=======
+
+This branch is officially broken!
+Apart from not writing tests for my changes, Datepicker has a different time
+formatting way than z3c.form. The project I use it in has a different
+DateConverter that supports 3 different ways of showing forms, thats not
+necessary in your case but it also means the DateConverter in this branch
+is probably broken.
+Since this package is not really maintained I currently have no plans
+of fixing that. Except if enough people ask for it.
+(do3cc)
+
+=================================================
 Datepicker (collective.z3cform.datepicker)
 ==========================================
 
