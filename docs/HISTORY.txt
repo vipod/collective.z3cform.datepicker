@@ -1,14 +1,8 @@
 Changelog
 =========
 
-0.1rc10 (unreleased)
+0.1rc10 (2010-07-05)
 --------------------
-
-- Nothing changed yet.
-
-
-0.1rc9 (2010-07-05)
--------------------
 
 * Brown bag release. Didn't realize that Inline Calendars don't show
   correct date [do3cc]

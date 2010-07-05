@@ -12,7 +12,7 @@ Since this package is not really maintained I currently have no plans
 of fixing that. Except if enough people ask for it.
 (do3cc)
 
-=================================================
+==========================================
 Datepicker (collective.z3cform.datepicker)
 ==========================================
 
