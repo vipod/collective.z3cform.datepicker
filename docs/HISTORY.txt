@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.1rc11 (unreleased)
+0.1rc11 (2010-07-05)
 --------------------
 
-- Nothing changed yet.
+- Handling of missing dates. Duh [do3cc]
 
 
 0.1rc10 (2010-07-05)
