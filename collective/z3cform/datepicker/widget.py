@@ -136,8 +136,10 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
         for name, value in self.events.items():
             if not value: continue
             options += name+': '+str(value)+','
-        if self.options['showInline']:
-            options += 'defaultDate:new Date(\''+IDataConverter(self).toFieldValue(self.value).strftime('%m/%d/%Y')+'\'),'
+        if self.options['showInline'] and self.value:
+            options += 'defaultDate:new Date(\''\
+                +IDataConverter(self).toFieldValue(self.value)\
+                .strftime('%m/%d/%Y')+'\'),'
         return options[:-1]
 
     def datepicker_javascript(self):
