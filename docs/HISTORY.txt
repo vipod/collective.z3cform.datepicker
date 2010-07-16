@@ -1,10 +1,13 @@
 Changelog
 =========
 
-0.1rc12 (unreleased)
+0.1rc12 (2010-07-16)
 --------------------
 
-- Nothing changed yet.
+- The javascript that generates an inline calendar contains block elements
+  This package had a span element for that, but thats illegal and doesn't
+  look good in IE6 and IE8. Why it looked good in IE7? Don't know
+  [do3cc]
 
 
 0.1rc11 (2010-07-05)

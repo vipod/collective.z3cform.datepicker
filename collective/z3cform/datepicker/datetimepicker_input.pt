@@ -63,5 +63,5 @@
                 tal:content="item" />
     </select>
 </span>
-<span id="" tal:attributes="id string:${view/id}-inline" />
+<div id="" tal:attributes="id string:${view/id}-inline" />
 <script type="text/javascript" tal:content="structure view/datepicker_javascript"></script>
