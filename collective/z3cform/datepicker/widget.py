@@ -234,8 +234,8 @@ class DateTimePickerWidget(DatePickerWidget):
                         if (datetime.length==1) {
                             date = datetime[0].split('/');
                             if (date.length==3) {
-                                jq("#%(id)s-month").val(parseInt(date[0])); 
-                                jq("#%(id)s-day").val(parseInt(date[1])); 
+                                jq("#%(id)s-month").val(parseInt(date[0], 10)); 
+                                jq("#%(id)s-day").val(parseInt(date[1], 10)); 
                                 jq("#%(id)s-year").val(parseInt(date[2]));
                                 jq("#%(id)s-hour").val('00');
                                 jq("#%(id)s-min").val('00');

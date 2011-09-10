@@ -1,10 +1,17 @@
 Changelog
 =========
 
-0.1rc13 (unreleased)
+0.1rc14 (unreleased)
 --------------------
 
 - Nothing changed yet.
+
+
+0.1rc13 (2011-09-09)
+--------------------
+
+- Fixing the incredible JavaScript parseInt("08")=0 error
+  [thomasw]
 
 
 0.1rc12 (2010-07-16)
