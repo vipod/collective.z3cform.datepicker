@@ -69,7 +69,7 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
         closeText               = u'Close',
         constrainInput          = True,
         currentText             = u'Today',
-        # dateFormat - we use mm/dd/yy always
+        # dateFormat - we use dd/mm/yy always
         dayNames                = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                                    'Thursday', 'Friday', 'Saturday'],
         dayNamesMin             = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
@@ -114,7 +114,11 @@ class DatePickerWidget(widget.HTMLTextInputWidget, Widget):
 
     @property
     def datepattern(self):
-        return IDataConverter(self).formatter.getPattern()
+        # this doesn't work, zope.i18n.Formatter has different variables
+        # notation than jquery UI datepicker formatDate
+        # return IDataConverter(self).formatter.getPattern()
+        
+        return 'dd/mm/yy'
 
     def update(self):
         super(DatePickerWidget, self).update()
@@ -296,7 +300,6 @@ class DateTimePickerWidget(DatePickerWidget):
         try:
             value = formatter.parse(self.value)
         except:
-            #import pdb ; pdb.set_trace()
             return None
         
         # TODO: What if the strftime return value has international letters?
@@ -398,12 +401,15 @@ class DateConverter(CalendarDataConverter):
     adapts(IDate, IDatePickerWidget)
     type = 'date'
 
+    def __init__(self, field, widget):
+        CalendarDataConverter.__init__(self, field, widget)
+        self.formatter.setPattern('dd/MM/yyyy')
+
     def toFieldValue(self, value):
         """See interfaces.IDataConverter""" 
         if value == u'':
             return self.field.missing_value
         try:
-            return self.formatter.parse(value, pattern="M/d/yyyy")
+            return self.formatter.parse(value)
         except DateTimeParseError, err:
             raise FormatterValidationError(err.args[0], value)
-

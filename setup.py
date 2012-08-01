@@ -26,7 +26,7 @@ setup(name='collective.z3cform.datepicker',
       install_requires=[
           'setuptools',
           'plone.z3cform',
-          'collective.jqueryui',
+          'collective.js.jqueryui',
       ],
       entry_points="""
       # -*- Entry points: -*-
