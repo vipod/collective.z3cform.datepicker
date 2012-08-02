@@ -33,4 +33,7 @@
                        name view/name;" />
 <img src="delete_icon.gif" 
      tal:attributes="id string:${view/id}-clear"/>
-<script type="text/javascript" tal:content="structure view/datepicker_javascript"></script>
+<script type="text/javascript"
+        tal:define="ajax_load request/ajax_load|nothing"
+        tal:condition="not:ajax_load"
+        tal:content="structure view/datepicker_javascript"></script>
